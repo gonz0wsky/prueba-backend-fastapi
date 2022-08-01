@@ -1,2 +1,8 @@
 # Cache
 __pycache__
+
+# Idea
+.idea
+
+# Env
+.env
