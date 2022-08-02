@@ -8,6 +8,7 @@ pydantic = "*"
 uvicorn = "*"
 fastapi = "*"
 python-dotenv = "*"
+strawberry-graphql = "*"
 
 [dev-packages]
 
