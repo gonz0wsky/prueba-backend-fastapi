@@ -1,0 +1,5 @@
+[MASTER]
+init-hook='import sys; sys.path.append(".")'
+
+disable=too-few-public-methods
+extension-pkg-allow-list=pydantic

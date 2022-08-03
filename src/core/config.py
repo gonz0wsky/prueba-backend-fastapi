@@ -1,8 +1,11 @@
+""" Config file """
 import os
 from pydantic import BaseSettings
 
 class Settings(BaseSettings):
+    """ Settings """
     class Config:
+        """ env config """
         env_file = '.env'
         env_file_encoding = 'utf-8'
 
