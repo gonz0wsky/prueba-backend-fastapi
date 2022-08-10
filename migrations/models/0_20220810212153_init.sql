@@ -1,0 +1,17 @@
+-- upgrade --
+CREATE TABLE IF NOT EXISTS "users" (
+    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+    "email" VARCHAR(255) NOT NULL UNIQUE,
+    "first_name" VARCHAR(30) NOT NULL,
+    "hash" VARCHAR(128) NOT NULL,
+    "id" UUID NOT NULL  PRIMARY KEY,
+    "last_name" VARCHAR(30) NOT NULL,
+    "modified_at" TIMESTAMPTZ NOT NULL  DEFAULT CURRENT_TIMESTAMP
+);
+COMMENT ON TABLE "users" IS 'User model ';
+CREATE TABLE IF NOT EXISTS "aerich" (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "version" VARCHAR(255) NOT NULL,
+    "app" VARCHAR(100) NOT NULL,
+    "content" JSONB NOT NULL
+);

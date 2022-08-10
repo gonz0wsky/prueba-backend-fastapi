@@ -14,7 +14,6 @@ class Settings(BaseSettings):
     DB_SERVER: str = os.environ.get("DB_SERVER")
     DB_PORT: str = os.environ.get("DB_PORT")
     DB_NAME: str = os.environ.get("DB_NAME")
-    DB_URL: str = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_SERVER}:{DB_PORT}/{DB_NAME}"
     HOST_URL: str = os.environ.get("HOST_NAME", "127.0.0.1")
     HOST_PORT: str = os.environ.get("HOST_PORT", "3000")
 
