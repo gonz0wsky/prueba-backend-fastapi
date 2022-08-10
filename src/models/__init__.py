@@ -1,2 +1,2 @@
 """ Models index """
-from .users_model import Users
+from .users.user_model import User

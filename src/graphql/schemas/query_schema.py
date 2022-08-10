@@ -7,9 +7,4 @@ from src.graphql.resolvers.user_resolver import get_user
 @strawberry.type
 class Query:
     """ Queries """
-
-    @strawberry.field
-    async def user(self) -> UserType:
-        """ Get me user """
-        user = await get_user()
-        return user
+    user: UserType = strawberry.field(resolver=get_user)

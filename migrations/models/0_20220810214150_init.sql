@@ -1,5 +1,5 @@
 -- upgrade --
-CREATE TABLE IF NOT EXISTS "users" (
+CREATE TABLE IF NOT EXISTS "user" (
     "created_at" TIMESTAMPTZ NOT NULL  DEFAULT CURRENT_TIMESTAMP,
     "email" VARCHAR(255) NOT NULL UNIQUE,
     "first_name" VARCHAR(30) NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS "users" (
     "last_name" VARCHAR(30) NOT NULL,
     "modified_at" TIMESTAMPTZ NOT NULL  DEFAULT CURRENT_TIMESTAMP
 );
-COMMENT ON TABLE "users" IS 'User model ';
+COMMENT ON TABLE "user" IS 'User model ';
 CREATE TABLE IF NOT EXISTS "aerich" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "version" VARCHAR(255) NOT NULL,

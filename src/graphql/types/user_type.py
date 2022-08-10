@@ -1,10 +1,12 @@
 """ User type. """
+from typing import Optional
 import strawberry
+
 
 @strawberry.type
 class UserType:
     """ User type. """
-    id: int
+    id: str
     first_name: str
-    last_name: str
+    last_name: Optional[str]
     token: str
