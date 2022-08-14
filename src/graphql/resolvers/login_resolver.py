@@ -10,6 +10,9 @@ async def login_user(data: LoginInput) -> UserType:
 
         user: User = await User.get(email=data.email)
 
+        if user is None:
+            raise Exception("Invalid credentials")
+
         is_valid_password: bool = check_password(data.password, user.hash)
 
         if not is_valid_password:
