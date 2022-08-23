@@ -1,13 +1,12 @@
 """ Login resolver"""
+from src.auth.strategy import create_access_token
 from src.auth.hash import check_password
 from src.models.users.user_model import User
-from src.graphql.types.user_type import UserType
 from src.graphql.inputs.login_input import LoginInput
 
-async def login_user(data: LoginInput) -> UserType:
+async def login_user(data: LoginInput) -> str:
     """ Login """
     try:
-
         user: User = await User.get(email=data.email)
 
         if user is None:
@@ -18,11 +17,7 @@ async def login_user(data: LoginInput) -> UserType:
         if not is_valid_password:
             raise Exception("Invalid credentials")
 
-        return UserType(
-            id=user.id,
-            first_name=user.first_name,
-            last_name=user.last_name,
-            token="TOKEN"
-        )
+        return create_access_token(user.id)
+
     except Exception as error:
         raise Exception("Invalid credentials") from error

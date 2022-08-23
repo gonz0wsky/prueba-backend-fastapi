@@ -7,4 +7,4 @@ from src.graphql.resolvers.user_resolver import get_user
 @strawberry.type
 class Query:
     """ Queries """
-    user: UserType = strawberry.field(permission_classes=[AuthGuard] ,resolver=get_user)
+    user: UserType = strawberry.field(permission_classes=[AuthGuard], resolver=get_user)

@@ -1,13 +1,12 @@
 """ Register resolver"""
+from src.auth.strategy import create_access_token
 from src.auth.hash import hash_password
 from src.graphql.inputs.register_input import  RegisterInput
-from src.graphql.types.user_type import UserType
 from src.models.users.user_model import User
 
-async def create_user(data: RegisterInput) -> UserType:
+async def create_user(data: RegisterInput) -> str:
     """ Register an user """
     try:
-
         hashed_password: str = hash_password(data.password)
 
         user: User = await User.create(
@@ -17,11 +16,8 @@ async def create_user(data: RegisterInput) -> UserType:
             hash=hashed_password,
         )
 
-        return UserType(
-            id=user.id,
-            first_name=user.first_name,
-            last_name=user.last_name,
-            token="TOKEN"
-        )
+        token = create_access_token(user.id)
+        return token
+
     except Exception as error:
         raise Exception("Error creating user") from error
