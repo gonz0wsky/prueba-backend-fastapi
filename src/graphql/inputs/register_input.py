@@ -9,3 +9,4 @@ class RegisterInput:
     first_name: str
     last_name: Optional[str]
     password: str
+    username: str

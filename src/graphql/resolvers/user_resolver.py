@@ -12,7 +12,8 @@ async def get_user(info: Info):
         return UserType(
             id=user.id,
             first_name=user.first_name,
-            last_name=user.last_name)
+            last_name=user.last_name,
+            username=user.username)
 
     except Exception as error:
         raise Exception("Error getting user") from error

@@ -6,6 +6,7 @@ import strawberry
 @strawberry.type
 class UserType:
     """ User type. """
-    id: str
     first_name: str
+    id: str
     last_name: Optional[str]
+    username: str

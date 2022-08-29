@@ -10,12 +10,8 @@ class User(models.Model):
     id = fields.UUIDField(pk=True)
     last_name = fields.CharField(max_length=30)
     modified_at = fields.DatetimeField(auto_now=True)
+    username = fields.CharField(max_length=40)
 
     def full_name(self) -> str:
         """ Return full name of user """
         return f"{self.first_name or ''} {self.last_name or ''}".strip()
-
-    class PydanticMeta:
-        """ Pydantic meta class """
-        computed = ['full_name']
-        excluded = ['hash']

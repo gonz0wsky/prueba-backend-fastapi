@@ -12,8 +12,9 @@ async def create_user(data: RegisterInput) -> str:
         user: User = await User.create(
             email=data.email,
             first_name=data.first_name,
-            last_name=data.last_name,
             hash=hashed_password,
+            last_name=data.last_name,
+            username=data.username
         )
 
         token = create_access_token(user.id)
