@@ -9,4 +9,3 @@ class UserType:
     id: str
     first_name: str
     last_name: Optional[str]
-    token: str

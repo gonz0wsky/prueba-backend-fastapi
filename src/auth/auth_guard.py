@@ -1,30 +1,31 @@
 """ Auth guard """
-import typing
+from datetime import datetime
+from typing import Any, Union
 from strawberry.permission import BasePermission
 from strawberry.types import Info
 from starlette.requests import Request
 from starlette.websockets import WebSocket
-from src.models.users.user_model import User
 
-from src.auth.strategy import authenticate_user
+from src.auth.strategy import decode_timestamp_from_token, decode_user_id_from_token
 
 class AuthGuard(BasePermission):
-    """ Check if user is authenticated """
+    """ Auth guard """
 
-    message = "User is not authenticated"
+    message = "Invalid token"
 
-    async def has_permission(self, source: typing.Any, info: Info, **kwargs) -> bool:
-        # pylint: disable=invalid-overridden-method
-
-        request: typing.Union[Request, WebSocket] = info.context["request"]
+    def has_permission(self, _: Any, info: Info, **kwargs) -> bool:
+        request: Union[Request, WebSocket] = info.context["request"]
 
         if "Authorization" in request.headers:
+
             token = request.headers["Authorization"]
-            user: User = await authenticate_user(token)
+            timestamp = decode_timestamp_from_token(token)
 
-            if user is None:
-                return False
+            if timestamp is not None and datetime.fromtimestamp(timestamp) < datetime.now():
+                self.message = "Token expired"
 
-            return True
+            user: str = decode_user_id_from_token(token)
+            if user is not None:
+                return True
 
         return False

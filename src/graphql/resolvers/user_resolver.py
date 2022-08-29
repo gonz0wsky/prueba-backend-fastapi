@@ -1,7 +1,18 @@
 """ User resolver"""
+from strawberry.types import Info
+from src.models.users.user_model import User
 from src.graphql.types.user_type import UserType
 
-async def get_user():
+async def get_user(info: Info):
     """Get logged user resolver"""
-    user = UserType(id=1, first_name="John", last_name="Doe", token="abc")
-    return user
+    try:
+        user_id: str = info.context['user']
+        user: User = await User.get(id=user_id)
+
+        return UserType(
+            id=user.id,
+            first_name=user.first_name,
+            last_name=user.last_name)
+
+    except Exception as error:
+        raise Exception("Error getting user") from error
