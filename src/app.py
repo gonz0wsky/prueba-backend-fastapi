@@ -3,6 +3,7 @@ from fastapi import FastAPI
 import strawberry
 from strawberry.fastapi import GraphQLRouter
 from strawberry.schema.config import StrawberryConfig
+from src.routes.init_routes import init_routes
 from src.graphql.middlewares.token_middleware import TokenMiddleware
 from src.db.db import init_db
 from src.graphql.schemas.query_schema import Query
@@ -21,6 +22,7 @@ def create_app():
     app = FastAPI()
 
     init_db(app)
+    init_routes(app)
 
     graphql_app = GraphQLRouter(schema)
     app.include_router(graphql_app, prefix="/graphql")
