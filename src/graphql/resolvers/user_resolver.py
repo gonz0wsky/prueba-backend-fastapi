@@ -3,7 +3,7 @@ from strawberry.types import Info
 from src.models.users.user_model import User
 from src.graphql.types.user_type import UserType
 
-async def get_user(info: Info):
+async def get_user(info: Info) -> UserType:
     """Get logged user resolver"""
     try:
         user_id: str = info.context['user']
